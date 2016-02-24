@@ -12,6 +12,7 @@
 		011308F81C7D9D7600C02261 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011308F61C7D9D7600C02261 /* Main.storyboard */; };
 		011308FA1C7D9D7600C02261 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011308F91C7D9D7600C02261 /* Assets.xcassets */; };
 		011308FD1C7D9D7600C02261 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011308FB1C7D9D7600C02261 /* LaunchScreen.storyboard */; };
+		011309051C7D9DBD00C02261 /* AXBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011309041C7D9DBD00C02261 /* AXBadgeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		011308F91C7D9D7600C02261 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011308FC1C7D9D7600C02261 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		011308FE1C7D9D7600C02261 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		011309041C7D9DBD00C02261 /* AXBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AXBadgeView.swift; path = AXBadgeView/AXBadgeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +58,21 @@
 			children = (
 				011308F21C7D9D7600C02261 /* AppDelegate.swift */,
 				011308F41C7D9D7600C02261 /* ViewController.swift */,
+				011309061C7D9DC000C02261 /* AXBadgeView */,
 				011308F61C7D9D7600C02261 /* Main.storyboard */,
 				011308F91C7D9D7600C02261 /* Assets.xcassets */,
 				011308FB1C7D9D7600C02261 /* LaunchScreen.storyboard */,
 				011308FE1C7D9D7600C02261 /* Info.plist */,
 			);
 			path = "AXBadgeView-Swift";
+			sourceTree = "<group>";
+		};
+		011309061C7D9DC000C02261 /* AXBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				011309041C7D9DBD00C02261 /* AXBadgeView.swift */,
+			);
+			name = AXBadgeView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +148,7 @@
 			files = (
 				011308F51C7D9D7600C02261 /* ViewController.swift in Sources */,
 				011308F31C7D9D7600C02261 /* AppDelegate.swift in Sources */,
+				011309051C7D9DBD00C02261 /* AXBadgeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
