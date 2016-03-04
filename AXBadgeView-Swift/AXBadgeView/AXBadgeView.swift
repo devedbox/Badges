@@ -122,6 +122,8 @@ extension UITabBarItem: AXBadgeViewDelegate {
 class AXBadgeView: UILabel {
     /// Attach view.
     weak var attachView: UIView!
+    /// Limited number to show text on .Number style.
+    var limitedNumber: Int = 99
     /// Style of badge view. Defaults to AXBadgeViewNormal.
     var style = AXBadgeViewStyle.Normal {
         didSet {
@@ -226,7 +228,11 @@ class AXBadgeView: UILabel {
             case .Text:
                 super.text = _textStorage
             case .Number:
-                super.text = "\(_textStorage)"
+                if Int(_textStorage) > limitedNumber {
+                    super.text = "\(limitedNumber)"+"+"
+                } else {
+                    super.text = "\(_textStorage)"
+                }
             default:
                 super.text = _textStorage
             }

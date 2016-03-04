@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self]() -> Void in
             self.navigationItem.leftBarButtonItem?.badgeView.text = "3"
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self]() -> Void in
-                self.navigationItem.leftBarButtonItem?.badgeView.text = "4"
+                self.navigationItem.leftBarButtonItem?.badgeView.text = "1000"
             }
         }
         
