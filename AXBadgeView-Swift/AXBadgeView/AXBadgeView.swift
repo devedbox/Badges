@@ -1,14 +1,33 @@
 //
-//  AXBadgeView.swift
-//  AXBadgeView-Swift
+//    AXBadgeView.swift
+//    AXBadgeView-Swift
 //
-//  Created by ai on 16/2/24.
-//  Copyright © 2016年 devedbox. All rights reserved.
+//    The MIT License (MIT)
 //
+//    Copyright (c) 2016 devedbox.
+//
+//    Permission is hereby granted, free of charge, to any person obtaining a copy
+//    of this software and associated documentation files (the "Software"), to deal
+//    in the Software without restriction, including without limitation the rights
+//    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//    copies of the Software, and to permit persons to whom the Software is
+//    furnished to do so, subject to the following conditions:
+//
+//    The above copyright notice and this permission notice shall be included in all
+//    copies or substantial portions of the Software.
+//
+//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//    SOFTWARE.
+
 
 import UIKit
 
-enum AXBadgeViewStyle: Int {
+public enum AXBadgeViewStyle: Int {
     /// Normal shows a red dot.
     case Normal
     /// Number shows a number form text.
@@ -19,7 +38,7 @@ enum AXBadgeViewStyle: Int {
     case New
 }
 
-enum AXBadgeViewAnimation: Int {
+public enum AXBadgeViewAnimation: Int {
     /// Animation none, badge view stay still.
     case None
     /// Animation scale.
@@ -38,7 +57,7 @@ private enum AXAxis: Int {
     case Z
 }
 
-protocol AXBadgeViewDelegate {
+public protocol AXBadgeViewDelegate {
     /// Badge view property.
     var badgeView: AXBadgeView {get set}
     /// Animated to show the badge view.
@@ -51,7 +70,7 @@ extension UIView: AXBadgeViewDelegate {
     private struct AssociatedKeys {
         static var key = "badgeViewKey"
     }
-    var badgeView: AXBadgeView {
+    public var badgeView: AXBadgeView {
         get {
             if let badge = objc_getAssociatedObject(self, &AssociatedKeys.key) as? AXBadgeView {
                 return badge
@@ -64,10 +83,10 @@ extension UIView: AXBadgeViewDelegate {
             objc_setAssociatedObject(self, &AssociatedKeys.key, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    func showBadge(animated animated: Bool) -> Void {
+    public func showBadge(animated animated: Bool) -> Void {
         badgeView.show(animated: animated, inView: self)
     }
-    func clearBadge(animated animated: Bool) -> Void {
+    public func clearBadge(animated animated: Bool) -> Void {
         badgeView.hide(animated: animated)
     }
 }
@@ -76,7 +95,7 @@ extension UIBarButtonItem: AXBadgeViewDelegate {
     private struct AssociatedKeys {
         static var key = "badgeViewKey"
     }
-    var badgeView: AXBadgeView {
+    public var badgeView: AXBadgeView {
         get {
             if let badge = objc_getAssociatedObject(self, &AssociatedKeys.key) as? AXBadgeView {
                 return badge
@@ -89,10 +108,10 @@ extension UIBarButtonItem: AXBadgeViewDelegate {
             objc_setAssociatedObject(self, &AssociatedKeys.key, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    func showBadge(animated animated: Bool) -> Void {
+    public func showBadge(animated animated: Bool) -> Void {
         badgeView.show(animated: animated, inView: self.valueForKey("_view") as? UIView)
     }
-    func clearBadge(animated animated: Bool) -> Void {
+    public func clearBadge(animated animated: Bool) -> Void {
         badgeView.hide(animated: animated)
     }
 }
@@ -101,7 +120,7 @@ extension UITabBarItem: AXBadgeViewDelegate {
     private struct AssociatedKeys {
         static var key = "badgeViewKey"
     }
-    var badgeView: AXBadgeView {
+    public var badgeView: AXBadgeView {
         get {
             if let badge = objc_getAssociatedObject(self, &AssociatedKeys.key) as? AXBadgeView {
                 return badge
@@ -114,15 +133,15 @@ extension UITabBarItem: AXBadgeViewDelegate {
             objc_setAssociatedObject(self, &AssociatedKeys.key, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    func showBadge(animated animated: Bool) -> Void {
+    public func showBadge(animated animated: Bool) -> Void {
         badgeView.show(animated: animated, inView: self.valueForKey("_view") as? UIView)
     }
-    func clearBadge(animated animated: Bool) -> Void {
+    public func clearBadge(animated animated: Bool) -> Void {
         badgeView.hide(animated: animated)
     }
 }
 
-class AXBadgeView: UILabel {
+public class AXBadgeView: UILabel {
     /// Attach view.
     weak var attachView: UIView!
     /// Limited number to show text on .Number style.
@@ -219,7 +238,7 @@ class AXBadgeView: UILabel {
     private let kAXBadgeViewScaleAnimationKey = "scale"
     private let kAXBadgeViewBounceAnimationKey = "bounce"
     
-    override var text:String? {
+    override public var text:String? {
         get {
             return super.text
         }
@@ -292,7 +311,7 @@ class AXBadgeView: UILabel {
         initializer()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
  
@@ -308,14 +327,14 @@ class AXBadgeView: UILabel {
         style = AXBadgeViewStyle.Normal
     }
     /// - override: sizeThatFits
-    override func sizeThatFits(size: CGSize) -> CGSize {
+    override public func sizeThatFits(size: CGSize) -> CGSize {
         var susize = super.sizeThatFits(size)
         susize.width = max(susize.width + susize.height/2, minSize.width)
         susize.height = max(susize.height, minSize.height)
         return susize
     }
     /// - override: willMoveToSuperview
-    override func willMoveToSuperview(newSuperview: UIView?) {
+    override public func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         if let _ = newSuperview {
             self.offsets = CGPointMake(offsets.x, offsets.y);
@@ -323,7 +342,7 @@ class AXBadgeView: UILabel {
         alpha = 1.0
     }
     /// - override: didMoveToSuperview
-    override func didMoveToSuperview() {
+    override public func didMoveToSuperview() {
         super.didMoveToSuperview()
         if let suview = superview {
             self.offsets = CGPointMake(offsets.x, offsets.y)
@@ -343,7 +362,7 @@ class AXBadgeView: UILabel {
     /// - parameter inView: the target view to add badge view.
     /// 
     /// - returns: Void.
-    func show(animated animated:Bool, inView view: UIView? = nil)->Void {
+    public func show(animated animated:Bool, inView view: UIView? = nil)->Void {
         attachView = view
         attachView?.addSubview(self)
         if hidden {
@@ -368,7 +387,7 @@ class AXBadgeView: UILabel {
     /// - parameter completion: completion block call back when the badge view finished hiding.
     ///
     /// - returns: Void.
-    func hide(animated animated: Bool, completion: dispatch_block_t? = nil) -> Void {
+    public func hide(animated animated: Bool, completion: dispatch_block_t? = nil) -> Void {
         if animated {
             UIView.animateWithDuration(0.35, animations: { [unowned self]() -> Void in
                     self.alpha = 0.0
