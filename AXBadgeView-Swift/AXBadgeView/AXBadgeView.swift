@@ -145,15 +145,15 @@ public class AXBadgeView: UILabel {
     /// Attach view.
     weak var attachView: UIView!
     /// Limited number to show text on .Number style.
-    var limitedNumber: Int = 99
+    public var limitedNumber: Int = 99
     /// Style of badge view. Defaults to AXBadgeViewNormal.
-    var style = AXBadgeViewStyle.Normal {
+    public var style = AXBadgeViewStyle.Normal {
         didSet {
             self.text = _textStorage
         }
     }
     /// Animation type of badge view. Defaults to None.
-    var animation = AXBadgeViewAnimation.None {
+    public var animation = AXBadgeViewAnimation.None {
         didSet {
             switch animation {
             case .Breathe:
@@ -170,7 +170,7 @@ public class AXBadgeView: UILabel {
         }
     }
     /// Offsets, Defaults to (CGFLOAT_MAX, CGFLOAT_MIN).
-    var offsets = CGPointMake(CGFloat.max, CGFloat.min) {
+    public var offsets = CGPointMake(CGFloat.max, CGFloat.min) {
         didSet {
             if let suview = superview {
                 let centerXConstant = offsets.x
@@ -210,18 +210,18 @@ public class AXBadgeView: UILabel {
         }
     }
     /// Hide on zero content. Defaults to YES.
-    var hideOnZero = true
+    public var hideOnZero = true
     /// Min size. Defaults to {12.0, 12.0}.
-    var minSize = CGSizeMake(12.0, 12.0) {
+    public var minSize = CGSizeMake(12.0, 12.0) {
         didSet {
             sizeToFit()
             text = _textStorage
         }
     }
     /// Scale content when set new content to badge label. Defaults to NO.
-    var scaleContent = false
+    public var scaleContent = false
     /// Is badge visible.
-    var visible:Bool {
+    public var visible:Bool {
         return (superview != nil && !hidden && alpha > 0) ? true : false
     }
     
