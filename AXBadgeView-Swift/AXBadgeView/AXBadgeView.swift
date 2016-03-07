@@ -39,8 +39,11 @@ private enum AXAxis: Int {
 }
 
 protocol AXBadgeViewDelegate {
+    /// Badge view property.
     var badgeView: AXBadgeView {get set}
+    /// Animated to show the badge view.
     func showBadge(animated animated: Bool) -> Void
+    /// Animated to hide the badge view.
     func clearBadge(animated animated: Bool) -> Void
 }
 
@@ -62,7 +65,7 @@ extension UIView: AXBadgeViewDelegate {
         }
     }
     func showBadge(animated animated: Bool) -> Void {
-        badgeView.show(inView: self, animated: animated)
+        badgeView.show(animated: animated, inView: self)
     }
     func clearBadge(animated animated: Bool) -> Void {
         badgeView.hide(animated: animated)
@@ -87,7 +90,7 @@ extension UIBarButtonItem: AXBadgeViewDelegate {
         }
     }
     func showBadge(animated animated: Bool) -> Void {
-        badgeView.show(inView: self.valueForKey("_view") as! UIView, animated: animated)
+        badgeView.show(animated: animated, inView: self.valueForKey("_view") as? UIView)
     }
     func clearBadge(animated animated: Bool) -> Void {
         badgeView.hide(animated: animated)
@@ -112,7 +115,7 @@ extension UITabBarItem: AXBadgeViewDelegate {
         }
     }
     func showBadge(animated animated: Bool) -> Void {
-        badgeView.show(inView: self.valueForKey("_view") as! UIView, animated: animated)
+        badgeView.show(animated: animated, inView: self.valueForKey("_view") as? UIView)
     }
     func clearBadge(animated animated: Bool) -> Void {
         badgeView.hide(animated: animated)
@@ -334,12 +337,14 @@ class AXBadgeView: UILabel {
             suview.bringSubviewToFront(self)
         }
     }
-    /// Show badge view with animation.
+    /// Show badge view in a target view with animation.
     ///
     /// - parameter animated: animated to show badge view or not.
+    /// - parameter inView: the target view to add badge view.
     /// 
     /// - returns: Void.
-    func show(animated animated:Bool)->Void {
+    func show(animated animated:Bool, inView view: UIView? = nil)->Void {
+        attachView = view
         attachView?.addSubview(self)
         if hidden {
             hidden = false
@@ -356,16 +361,6 @@ class AXBadgeView: UILabel {
         } else {
             transform = CGAffineTransformIdentity
         }
-    }
-    /// Show badge view in a target view with animation.
-    ///
-    /// - parameter inView: the target view to add badge view.
-    /// - parameter animated: animated to show badge view or not.
-    ///
-    /// - returns: Void.
-    func show(inView view: UIView, animated: Bool) -> Void {
-        attachView = view
-        show(animated: animated)
     }
     /// Hide the badge view with animation.
     ///

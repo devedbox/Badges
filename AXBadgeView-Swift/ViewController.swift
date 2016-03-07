@@ -26,7 +26,7 @@ class ViewController: UIViewController {
                 self.heightConstant.constant += 50
                 self.widthConstant.constant -= 50
                 UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions(rawValue: 7), animations: { [unowned self]() -> Void in
-                        self.view.layoutSubviews()
+                    self.view.layoutSubviews()
                     }, completion: {[unowned self](finished: Bool) -> Void in
                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self]() -> Void in
                             self.heightConstant.constant -= 100
@@ -36,14 +36,10 @@ class ViewController: UIViewController {
                                 }, completion:{[unowned self](finished: Bool) -> Void in
                                     self.showsView.badgeView.offsets = CGPointMake(CGFloat.max, CGFloat.min)
                                 })
-                            }
+                        }
                     })
             }
         }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         // MARK: - Left bar button item.
         navigationItem.leftBarButtonItem?.showBadge(animated: true)
         navigationItem.leftBarButtonItem?.badgeView.animation = AXBadgeViewAnimation.Breathe
@@ -67,6 +63,10 @@ class ViewController: UIViewController {
         navigationController?.tabBarItem?.badgeView.animation = AXBadgeViewAnimation.Breathe
         navigationController?.tabBarItem?.showBadge(animated: true)
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,6 +76,8 @@ class ViewController: UIViewController {
     @IBAction func badgeViewAction(sender: UIButton) {
         if showsView.badgeView.visible {
             showsView.clearBadge(animated: true)
+            self.heightConstant.constant = 100
+            self.widthConstant.constant = 100
         } else {
             showsView.showBadge(animated: true)
         }
