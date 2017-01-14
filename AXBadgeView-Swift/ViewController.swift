@@ -18,23 +18,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         showsView.showBadge(animated: true)
-        showsView.badgeView.animation = AXBadgeViewAnimation.Scale
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self]() -> Void in
-            self.showsView.badgeView.offsets = CGPointMake(50, 0)
-            self.showsView.badgeView.style = AXBadgeViewStyle.New
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self]() -> Void in
+        showsView.badgeView.animation = AXBadgeViewAnimation.scale
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
+            self.showsView.badgeView.offsets = CGPoint(x: 50, y: 0)
+            self.showsView.badgeView.style = AXBadgeViewStyle.new
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
                 self.heightConstant.constant += 50
                 self.widthConstant.constant -= 50
-                UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions(rawValue: 7), animations: { [unowned self]() -> Void in
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions(rawValue: 7), animations: { [unowned self]() -> Void in
                     self.view.layoutSubviews()
                     }, completion: {[unowned self](finished: Bool) -> Void in
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self]() -> Void in
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
                             self.heightConstant.constant -= 100
                             self.widthConstant.constant += 100
-                            UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions(rawValue: 7), animations: { [unowned self]() -> Void in
+                            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions(rawValue: 7), animations: { [unowned self]() -> Void in
                                 self.view.layoutSubviews()
                                 }, completion:{[unowned self](finished: Bool) -> Void in
-                                    self.showsView.badgeView.offsets = CGPointMake(CGFloat.max, CGFloat.min)
+                                    self.showsView.badgeView.offsets = CGPoint(x: CGFloat.greatestFiniteMagnitude, y: CGFloat.leastNormalMagnitude)
                                 })
                         }
                     })
@@ -42,29 +42,29 @@ class ViewController: UIViewController {
         }
         // MARK: - Left bar button item.
         navigationItem.leftBarButtonItem?.showBadge(animated: true)
-        navigationItem.leftBarButtonItem?.badgeView.animation = AXBadgeViewAnimation.Breathe
-        navigationItem.leftBarButtonItem?.badgeView.style = AXBadgeViewStyle.Number
+        navigationItem.leftBarButtonItem?.badgeView.animation = AXBadgeViewAnimation.breathe
+        navigationItem.leftBarButtonItem?.badgeView.style = AXBadgeViewStyle.number
         navigationItem.leftBarButtonItem?.badgeView.text = "2"
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self]() -> Void in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
             self.navigationItem.leftBarButtonItem?.badgeView.text = "3"
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [unowned self]() -> Void in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
                 self.navigationItem.leftBarButtonItem?.badgeView.text = "1000"
             }
         }
         
         // MARK: - Right bar button item.
         navigationItem.rightBarButtonItem?.showBadge(animated: true)
-        navigationItem.rightBarButtonItem?.badgeView.offsets = CGPointMake(30, CGFloat.min)
-        navigationItem.rightBarButtonItem?.badgeView.animation = AXBadgeViewAnimation.Bounce
+        navigationItem.rightBarButtonItem?.badgeView.offsets = CGPoint(x: 30, y: CGFloat.leastNormalMagnitude)
+        navigationItem.rightBarButtonItem?.badgeView.animation = AXBadgeViewAnimation.bounce
         
         // MARK: - Tab bar item.
-        navigationController?.tabBarItem?.badgeView.style = AXBadgeViewStyle.New
-        navigationController?.tabBarItem?.badgeView.offsets = CGPointMake(view.bounds.width/4+10, 0)
-        navigationController?.tabBarItem?.badgeView.animation = AXBadgeViewAnimation.Breathe
+        navigationController?.tabBarItem?.badgeView.style = AXBadgeViewStyle.new
+        navigationController?.tabBarItem?.badgeView.offsets = CGPoint(x: view.bounds.width/4+10, y: 0)
+        navigationController?.tabBarItem?.badgeView.animation = AXBadgeViewAnimation.breathe
         navigationController?.tabBarItem?.showBadge(animated: true)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func badgeViewAction(sender: UIButton) {
+    @IBAction func badgeViewAction(_ sender: UIButton) {
         if showsView.badgeView.visible {
             showsView.clearBadge(animated: true)
             self.heightConstant.constant = 100

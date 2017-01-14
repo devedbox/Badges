@@ -26,48 +26,72 @@
 
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 public enum AXBadgeViewStyle: Int {
     /// Normal shows a red dot.
-    case Normal
+    case normal
     /// Number shows a number form text.
-    case Number
+    case number
     /// Text shows a custom text.
-    case Text
+    case text
     /// New shows a new text.
-    case New
+    case new
 }
 
 public enum AXBadgeViewAnimation: Int {
     /// Animation none, badge view stay still.
-    case None
+    case none
     /// Animation scale.
-    case Scale
+    case scale
     /// Animation shake.
-    case Shake
+    case shake
     /// Animation bounce.
-    case Bounce
+    case bounce
     /// Animation breathe.
-    case Breathe
+    case breathe
 }
 
 private enum AXAxis: Int {
-    case X
-    case Y
-    case Z
+    case x
+    case y
+    case z
 }
 
 public protocol AXBadgeViewDelegate {
     /// Badge view property.
     var badgeView: AXBadgeView {get set}
     /// Animated to show the badge view.
-    func showBadge(animated animated: Bool) -> Void
+    func showBadge(animated: Bool) -> Void
     /// Animated to hide the badge view.
-    func clearBadge(animated animated: Bool) -> Void
+    func clearBadge(animated: Bool) -> Void
 }
 
 extension UIView: AXBadgeViewDelegate {
-    private struct AssociatedKeys {
+    fileprivate struct AssociatedKeys {
         static var key = "badgeViewKey"
     }
     public var badgeView: AXBadgeView {
@@ -83,16 +107,16 @@ extension UIView: AXBadgeViewDelegate {
             objc_setAssociatedObject(self, &AssociatedKeys.key, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    public func showBadge(animated animated: Bool) -> Void {
+    public func showBadge(animated: Bool) -> Void {
         badgeView.show(animated: animated, inView: self)
     }
-    public func clearBadge(animated animated: Bool) -> Void {
+    public func clearBadge(animated: Bool) -> Void {
         badgeView.hide(animated: animated)
     }
 }
 
 extension UIBarButtonItem: AXBadgeViewDelegate {
-    private struct AssociatedKeys {
+    fileprivate struct AssociatedKeys {
         static var key = "badgeViewKey"
     }
     public var badgeView: AXBadgeView {
@@ -108,16 +132,16 @@ extension UIBarButtonItem: AXBadgeViewDelegate {
             objc_setAssociatedObject(self, &AssociatedKeys.key, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    public func showBadge(animated animated: Bool) -> Void {
-        badgeView.show(animated: animated, inView: self.valueForKey("_view") as? UIView)
+    public func showBadge(animated: Bool) -> Void {
+        badgeView.show(animated: animated, inView: self.value(forKey: "_view") as? UIView)
     }
-    public func clearBadge(animated animated: Bool) -> Void {
+    public func clearBadge(animated: Bool) -> Void {
         badgeView.hide(animated: animated)
     }
 }
 
 extension UITabBarItem: AXBadgeViewDelegate {
-    private struct AssociatedKeys {
+    fileprivate struct AssociatedKeys {
         static var key = "badgeViewKey"
     }
     public var badgeView: AXBadgeView {
@@ -133,44 +157,46 @@ extension UITabBarItem: AXBadgeViewDelegate {
             objc_setAssociatedObject(self, &AssociatedKeys.key, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    public func showBadge(animated animated: Bool) -> Void {
-        badgeView.show(animated: animated, inView: self.valueForKey("_view") as? UIView)
+    public func showBadge(animated: Bool) -> Void {
+        badgeView.show(animated: animated, inView: self.value(forKey: "_view") as? UIView)
     }
-    public func clearBadge(animated animated: Bool) -> Void {
+    public func clearBadge(animated: Bool) -> Void {
         badgeView.hide(animated: animated)
     }
 }
+
+
 
 public class AXBadgeView: UILabel {
     /// Attach view.
     weak var attachView: UIView!
     /// Limited number to show text on .Number style.
-    public var limitedNumber: Int = 99
+    open var limitedNumber: Int = 99
     /// Style of badge view. Defaults to AXBadgeViewNormal.
-    public var style = AXBadgeViewStyle.Normal {
+    open var style = AXBadgeViewStyle.normal {
         didSet {
             self.text = _textStorage
         }
     }
     /// Animation type of badge view. Defaults to None.
-    public var animation = AXBadgeViewAnimation.None {
+    open var animation = AXBadgeViewAnimation.none {
         didSet {
             switch animation {
-            case .Breathe:
-                layer.addAnimation(_breathingAnimation(duration: 1.2), forKey: kAXBadgeViewBreatheAnimationKey)
-            case .Bounce:
-                layer.addAnimation(_bounceAnimation(repeatCount: FLT_MAX, duration: 0.8, fromLayer: layer), forKey: kAXBadgeViewBounceAnimationKey)
-            case .Scale:
-                layer.addAnimation(_scaleAnimation(fromScale: 1.2, toScale: 0.8, duration: 0.8, repeatCount: FLT_MAX), forKey: kAXBadgeViewScaleAnimationKey)
-            case .Shake:
-                layer.addAnimation(_shakeAnimation(repeatCount: FLT_MAX, duration: 0.8, fromLayer: layer), forKey: kAXBadgeViewShakeAnimationKey)
+            case .breathe:
+                layer.add(_breathingAnimation(duration: 1.2), forKey: kAXBadgeViewBreatheAnimationKey)
+            case .bounce:
+                layer.add(_bounceAnimation(repeatCount: FLT_MAX, duration: 0.8, fromLayer: layer), forKey: kAXBadgeViewBounceAnimationKey)
+            case .scale:
+                layer.add(_scaleAnimation(fromScale: 1.2, toScale: 0.8, duration: 0.8, repeatCount: FLT_MAX), forKey: kAXBadgeViewScaleAnimationKey)
+            case .shake:
+                layer.add(_shakeAnimation(repeatCount: FLT_MAX, duration: 0.8, fromLayer: layer), forKey: kAXBadgeViewShakeAnimationKey)
             default:
                 layer.removeAllAnimations()
             }
         }
     }
     /// Offsets, Defaults to (CGFLOAT_MAX, CGFLOAT_MIN).
-    public var offsets = CGPointMake(CGFloat.max, CGFloat.min) {
+    open var offsets = CGPoint(x: CGFloat.greatestFiniteMagnitude, y: CGFloat.leastNormalMagnitude) {
         didSet {
             if let suview = superview {
                 let centerXConstant = offsets.x
@@ -187,20 +213,20 @@ public class AXBadgeView: UILabel {
                     }
                 }
                 
-                if centerXConstant == CGFloat.min || centerXConstant == 0.0 {
-                    horizontalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: suview, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0.0)
-                } else if centerXConstant == CGFloat.max || centerXConstant == suview.bounds.width {
-                    horizontalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: suview, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0.0)
+                if centerXConstant == CGFloat.leastNormalMagnitude || centerXConstant == 0.0 {
+                    horizontalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: suview, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: 0.0)
+                } else if centerXConstant == CGFloat.greatestFiniteMagnitude || centerXConstant == suview.bounds.width {
+                    horizontalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: suview, attribute: NSLayoutAttribute.right, multiplier: 1.0, constant: 0.0)
                 } else {
-                    horizontalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: suview, attribute: NSLayoutAttribute.Right, multiplier: centerXConstant/suview.bounds.width, constant: 0.0)
+                    horizontalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: suview, attribute: NSLayoutAttribute.right, multiplier: centerXConstant/suview.bounds.width, constant: 0.0)
                 }
                 
-                if centerYConstant == CGFloat.min || centerYConstant == 0.0 {
-                    verticalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: suview, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0.0)
-                } else if centerYConstant == CGFloat.max || centerYConstant == suview.bounds.height {
-                    verticalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: suview, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0.0)
+                if centerYConstant == CGFloat.leastNormalMagnitude || centerYConstant == 0.0 {
+                    verticalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: suview, attribute: NSLayoutAttribute.top, multiplier: 1.0, constant: 0.0)
+                } else if centerYConstant == CGFloat.greatestFiniteMagnitude || centerYConstant == suview.bounds.height {
+                    verticalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: suview, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0.0)
                 } else {
-                    verticalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: suview, attribute: NSLayoutAttribute.Bottom, multiplier: centerYConstant/suview.bounds.height, constant: 0.0)
+                    verticalLayout = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: suview, attribute: NSLayoutAttribute.bottom, multiplier: centerYConstant/suview.bounds.height, constant: 0.0)
                 }
                 
                 superview?.addConstraint(horizontalLayout)
@@ -210,46 +236,46 @@ public class AXBadgeView: UILabel {
         }
     }
     /// Hide on zero content. Defaults to YES.
-    public var hideOnZero = true
+    open var hideOnZero = true
     /// Min size. Defaults to {12.0, 12.0}.
-    public var minSize = CGSizeMake(12.0, 12.0) {
+    open var minSize = CGSize(width: 12.0, height: 12.0) {
         didSet {
             sizeToFit()
             text = _textStorage
         }
     }
     /// Scale content when set new content to badge label. Defaults to NO.
-    public var scaleContent = false
+    open var scaleContent = false
     /// Is badge visible.
-    public var visible:Bool {
-        return (superview != nil && !hidden && alpha > 0) ? true : false
+    open var visible:Bool {
+        return (superview != nil && !isHidden && alpha > 0) ? true : false
     }
     
-    private var _textStorage: String = ""
+    fileprivate var _textStorage: String = ""
     
-    private var horizontalLayout: NSLayoutConstraint!
-    private var verticalLayout: NSLayoutConstraint!
-    private lazy var widthLayout: NSLayoutConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 0)
-    private lazy var heightLayout: NSLayoutConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 0)
+    fileprivate var horizontalLayout: NSLayoutConstraint!
+    fileprivate var verticalLayout: NSLayoutConstraint!
+    fileprivate lazy var widthLayout: NSLayoutConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0)
+    fileprivate lazy var heightLayout: NSLayoutConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0)
     
-    private let kAXBadgeViewBreatheAnimationKey = "breathe"
-    private let kAXBadgeViewRotateAnimationKey = "rotate"
-    private let kAXBadgeViewShakeAnimationKey = "shake"
-    private let kAXBadgeViewScaleAnimationKey = "scale"
-    private let kAXBadgeViewBounceAnimationKey = "bounce"
+    fileprivate let kAXBadgeViewBreatheAnimationKey = "breathe"
+    fileprivate let kAXBadgeViewRotateAnimationKey = "rotate"
+    fileprivate let kAXBadgeViewShakeAnimationKey = "shake"
+    fileprivate let kAXBadgeViewScaleAnimationKey = "scale"
+    fileprivate let kAXBadgeViewBounceAnimationKey = "bounce"
     
-    override public var text:String? {
+    override open var text:String? {
         get {
             return super.text
         }
         set {
             _textStorage = newValue ?? ""
             switch style {
-            case .New:
+            case .new:
                 super.text = "new"
-            case .Text:
+            case .text:
                 super.text = _textStorage
-            case .Number:
+            case .number:
                 if Int(_textStorage) > limitedNumber {
                     super.text = "\(limitedNumber)"+"+"
                 } else {
@@ -281,29 +307,29 @@ public class AXBadgeView: UILabel {
             guard let _text = self.text else {return}
             if hideOnZero {
                 switch style {
-                case .Number:
+                case .number:
                     if NSString(string: _text).integerValue == 0 {
-                        hidden = true
+                        isHidden = true
                     } else {
-                        hidden = false
+                        isHidden = false
                     }
-                case .Text:
+                case .text:
                     if _text.isEmpty {
-                        hidden = true
+                        isHidden = true
                     } else {
-                        hidden = false
+                        isHidden = false
                     }
-                case .New: fallthrough
+                case .new: fallthrough
                 default: break
                 }
             } else {
-                hidden = false
+                isHidden = false
             }
         }
     }
     
     convenience init() {
-        self.init(frame:CGRectZero)
+        self.init(frame:CGRect.zero)
     }
     
     override init(frame: CGRect) {
@@ -318,34 +344,34 @@ public class AXBadgeView: UILabel {
     deinit {
     }
     /// Initializer.
-    private func initializer() -> Void {
+    fileprivate func initializer() -> Void {
         translatesAutoresizingMaskIntoConstraints = false
-        font = UIFont.systemFontOfSize(12)
-        backgroundColor = UIColor.redColor()
-        textColor = UIColor.whiteColor()
-        textAlignment = NSTextAlignment.Center
-        style = AXBadgeViewStyle.Normal
+        font = UIFont.systemFont(ofSize: 12)
+        backgroundColor = UIColor.red
+        textColor = UIColor.white
+        textAlignment = NSTextAlignment.center
+        style = AXBadgeViewStyle.normal
     }
     /// - override: sizeThatFits
-    override public func sizeThatFits(size: CGSize) -> CGSize {
+    override open func sizeThatFits(_ size: CGSize) -> CGSize {
         var susize = super.sizeThatFits(size)
         susize.width = max(susize.width + susize.height/2, minSize.width)
         susize.height = max(susize.height, minSize.height)
         return susize
     }
     /// - override: willMoveToSuperview
-    override public func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override open func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         if let _ = newSuperview {
-            self.offsets = CGPointMake(offsets.x, offsets.y);
+            self.offsets = CGPoint(x: offsets.x, y: offsets.y);
         }
         alpha = 1.0
     }
     /// - override: didMoveToSuperview
-    override public func didMoveToSuperview() {
+    override open func didMoveToSuperview() {
         super.didMoveToSuperview()
         if let suview = superview {
-            self.offsets = CGPointMake(offsets.x, offsets.y)
+            self.offsets = CGPoint(x: offsets.x, y: offsets.y)
             if !suview.constraints.contains(verticalLayout) {
                 suview.addConstraint(verticalLayout)
             }
@@ -353,7 +379,7 @@ public class AXBadgeView: UILabel {
                 suview.addConstraint(horizontalLayout)
             }
             suview.setNeedsDisplay()
-            suview.bringSubviewToFront(self)
+            suview.bringSubview(toFront: self)
         }
     }
     /// Show badge view in a target view with animation.
@@ -362,23 +388,23 @@ public class AXBadgeView: UILabel {
     /// - parameter inView: the target view to add badge view.
     /// 
     /// - returns: Void.
-    public func show(animated animated:Bool, inView view: UIView? = nil)->Void {
+    open func show(animated:Bool, inView view: UIView? = nil)->Void {
         attachView = view
         attachView?.addSubview(self)
-        if hidden {
-            hidden = false
+        if isHidden {
+            isHidden = false
         }
         if alpha < 1.0 {
             alpha = 1.0
         }
-        transform = CGAffineTransformMakeScale(0.0, 0.0)
+        transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
         if animated {
-            UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.6, options: UIViewAnimationOptions(rawValue: 7), animations: { [unowned self]() -> Void in
-                    self.transform = CGAffineTransformIdentity
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.6, options: UIViewAnimationOptions(rawValue: 7), animations: { [unowned self]() -> Void in
+                    self.transform = CGAffineTransform.identity
                 }, completion: { (finished: Bool) -> Void in
                 })
         } else {
-            transform = CGAffineTransformIdentity
+            transform = CGAffineTransform.identity
         }
     }
     /// Hide the badge view with animation.
@@ -387,9 +413,9 @@ public class AXBadgeView: UILabel {
     /// - parameter completion: completion block call back when the badge view finished hiding.
     ///
     /// - returns: Void.
-    public func hide(animated animated: Bool, completion: dispatch_block_t? = nil) -> Void {
+    open func hide(animated: Bool, completion:(()->())? = nil) -> Void {
         if animated {
-            UIView.animateWithDuration(0.35, animations: { [unowned self]() -> Void in
+            UIView.animate(withDuration: 0.35, animations: { [unowned self]() -> Void in
                     self.alpha = 0.0
                 }, completion: { [unowned self](finished: Bool) -> Void in
                     if finished {
@@ -410,14 +436,14 @@ public class AXBadgeView: UILabel {
 /// - parameter reapeating: repeat count of animation.
 ///
 /// - returns: breath animation.
-private func _breathingAnimation(duration duration:NSTimeInterval) -> CABasicAnimation {
+private func _breathingAnimation(duration:TimeInterval) -> CABasicAnimation {
     let animation = CABasicAnimation(keyPath: "opacity")
     animation.fromValue = 1.0
     animation.toValue = 0.1
     animation.autoreverses = true
     animation.duration = duration
     animation.repeatCount = FLT_MAX
-    animation.removedOnCompletion = false
+    animation.isRemovedOnCompletion = false
     animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
     animation.fillMode = kCAFillModeForwards
     return animation
@@ -429,14 +455,14 @@ private func _breathingAnimation(duration duration:NSTimeInterval) -> CABasicAni
 /// - parameter duration: animation duration.
 /// 
 /// - returns: breath animation.
-private func _breathingAnimation(repeating repeating:Float, duration: NSTimeInterval) -> CABasicAnimation {
+private func _breathingAnimation(repeating:Float, duration: TimeInterval) -> CABasicAnimation {
     let animation = CABasicAnimation(keyPath: "opacity")
     animation.fromValue = 1.0
     animation.toValue = 0.1
     animation.autoreverses = true
     animation.duration = duration
     animation.repeatCount = repeating
-    animation.removedOnCompletion = false
+    animation.isRemovedOnCompletion = false
     animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
     animation.fillMode = kCAFillModeForwards
     return animation
@@ -450,7 +476,7 @@ private func _breathingAnimation(repeating repeating:Float, duration: NSTimeInte
 /// - parameter repeatCount: repeat count of animation.
 ///
 /// - returns: rotation animation.
-private func _rotationAnimation(duration duration: NSTimeInterval, degree: CGFloat, direction: AXAxis, repeatCount: Float) -> CABasicAnimation {
+private func _rotationAnimation(duration: TimeInterval, degree: CGFloat, direction: AXAxis, repeatCount: Float) -> CABasicAnimation {
     var animation: CABasicAnimation!
     let axisArr = ["transform.rotation.x", "transform.rotation.y", "transform.rotation.z"]
     animation = CABasicAnimation(keyPath: axisArr[direction.rawValue])
@@ -459,7 +485,7 @@ private func _rotationAnimation(duration duration: NSTimeInterval, degree: CGFlo
     animation.autoreverses = true
     animation.duration = duration
     animation.repeatCount = repeatCount
-    animation.removedOnCompletion = false
+    animation.isRemovedOnCompletion = false
     animation.fillMode = kCAFillModeForwards
     return animation
 }
@@ -471,14 +497,14 @@ private func _rotationAnimation(duration duration: NSTimeInterval, degree: CGFlo
 /// - parameter repeatCount: repeat count of animation.
 /// 
 /// - returns: scale animation.
-private func _scaleAnimation(fromScale from: Float, toScale: Float, duration: NSTimeInterval, repeatCount: Float) -> CABasicAnimation {
+private func _scaleAnimation(fromScale from: Float, toScale: Float, duration: TimeInterval, repeatCount: Float) -> CABasicAnimation {
     let animation = CABasicAnimation(keyPath: "transform.scale")
     animation.fromValue = from
     animation.toValue = toScale
     animation.duration = duration
     animation.autoreverses = true
     animation.repeatCount = repeatCount
-    animation.removedOnCompletion = false
+    animation.isRemovedOnCompletion = false
     animation.fillMode = kCAFillModeForwards
     return animation
 }
@@ -490,11 +516,11 @@ private func _scaleAnimation(fromScale from: Float, toScale: Float, duration: NS
 /// - parameter fromLayer:   layer to add begin.
 ///
 /// - returns: shake animation.
-private func _shakeAnimation(repeatCount repeatCount: Float, duration: NSTimeInterval, fromLayer layer: CALayer) -> CAKeyframeAnimation {
+private func _shakeAnimation(repeatCount: Float, duration: TimeInterval, fromLayer layer: CALayer) -> CAKeyframeAnimation {
     let originSize = layer.bounds.size
     let hOffset = originSize.width/4;
     let animation = CAKeyframeAnimation(keyPath: "transform")
-    animation.values = [NSValue(CATransform3D: CATransform3DMakeTranslation(0, 0, 0)),NSValue(CATransform3D: CATransform3DMakeTranslation(-hOffset, 0, 0)),NSValue(CATransform3D: CATransform3DMakeTranslation(0, 0, 0)),NSValue(CATransform3D: CATransform3DMakeTranslation(hOffset, 0, 0)),NSValue(CATransform3D: CATransform3DMakeTranslation(0, 0, 0))]
+    animation.values = [NSValue(caTransform3D: CATransform3DMakeTranslation(0, 0, 0)),NSValue(caTransform3D: CATransform3DMakeTranslation(-hOffset, 0, 0)),NSValue(caTransform3D: CATransform3DMakeTranslation(0, 0, 0)),NSValue(caTransform3D: CATransform3DMakeTranslation(hOffset, 0, 0)),NSValue(caTransform3D: CATransform3DMakeTranslation(0, 0, 0))]
     animation.repeatCount = repeatCount
     animation.duration = duration
     animation.fillMode = kCAFillModeForwards
@@ -508,11 +534,11 @@ private func _shakeAnimation(repeatCount repeatCount: Float, duration: NSTimeInt
 /// - parameter fromLayer:   layer to add begin.
 /// 
 /// - returns: bounce animation.
-private func _bounceAnimation(repeatCount repeatCount: Float, duration: NSTimeInterval, fromLayer layer: CALayer) -> CAKeyframeAnimation {
+private func _bounceAnimation(repeatCount: Float, duration: TimeInterval, fromLayer layer: CALayer) -> CAKeyframeAnimation {
     let originSize = layer.bounds.size
     let hOffset = originSize.height/4;
     let animation = CAKeyframeAnimation(keyPath: "transform")
-    animation.values = [NSValue(CATransform3D: CATransform3DMakeTranslation(0, 0, 0)),NSValue(CATransform3D: CATransform3DMakeTranslation(0, -hOffset, 0)),NSValue(CATransform3D: CATransform3DMakeTranslation(0, 0, 0)),NSValue(CATransform3D: CATransform3DMakeTranslation(0, hOffset, 0)),NSValue(CATransform3D: CATransform3DMakeTranslation(0, 0, 0))]
+    animation.values = [NSValue(caTransform3D: CATransform3DMakeTranslation(0, 0, 0)),NSValue(caTransform3D: CATransform3DMakeTranslation(0, -hOffset, 0)),NSValue(caTransform3D: CATransform3DMakeTranslation(0, 0, 0)),NSValue(caTransform3D: CATransform3DMakeTranslation(0, hOffset, 0)),NSValue(caTransform3D: CATransform3DMakeTranslation(0, 0, 0))]
     animation.repeatCount = repeatCount
     animation.duration = duration
     animation.fillMode = kCAFillModeForwards
