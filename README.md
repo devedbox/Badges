@@ -1,5 +1,7 @@
-# AXBadgeView-Swift
+![logo](http://ww1.sinaimg.cn/large/d2297bd2gw1fbr5ael3cvj21kw0e8401.jpg)
+
 # 介绍
+
 [![Build Status](https://travis-ci.org/devedbox/AXBadgeView-Swift.svg?branch=master)](https://travis-ci.org/devedbox/AXBadgeView-Swift)[![Version](https://img.shields.io/cocoapods/v/AXBadgeView-Swift.svg?style=flat)](http://cocoapods.org/pods/AXBadgeView-Swift)[![License](https://img.shields.io/cocoapods/l/AXBadgeView-Swift.svg?style=flat)](http://cocoapods.org/pods/AXBadgeView-Swift)[![Platform](https://img.shields.io/cocoapods/p/AXBadgeView-Swift.svg?style=flat)](http://cocoapods.org/pods/AXBadgeView-Swift)
 
 [AXBadgeView-Swift](https://github.com/devedbox/AXBadgeView-Swift)是一个badge view管理类，是之前我写的[AXBadgeView](https://github.com/devedbox/AXBadgeView)的Swift版本（以下的介绍中统一使用__AXBadgeView__），在新版本中没有太大的改动，主要的是把原有的功能实用swift实现了，使用方法是一样的。
@@ -125,7 +127,7 @@ protocol AXBadgeViewDelegate {
 2. 运行安装命令： `pod install`.
 3. - swift直接使用.
    - oc在需要使用的地方`#import "AXBadgeView.h"`.
-   
+
 # License
 
 This code is distributed under the terms and conditions of the [MIT license](LICENSE). 
