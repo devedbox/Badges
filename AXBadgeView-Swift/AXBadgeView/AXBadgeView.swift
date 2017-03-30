@@ -185,11 +185,11 @@ public class AXBadgeView: UILabel {
             case .breathe:
                 layer.add(_breathingAnimation(duration: 1.2), forKey: kAXBadgeViewBreatheAnimationKey)
             case .bounce:
-                layer.add(_bounceAnimation(repeatCount: FLT_MAX, duration: 0.8, fromLayer: layer), forKey: kAXBadgeViewBounceAnimationKey)
+                layer.add(_bounceAnimation(repeatCount: Float.greatestFiniteMagnitude, duration: 0.8, fromLayer: layer), forKey: kAXBadgeViewBounceAnimationKey)
             case .scale:
-                layer.add(_scaleAnimation(fromScale: 1.2, toScale: 0.8, duration: 0.8, repeatCount: FLT_MAX), forKey: kAXBadgeViewScaleAnimationKey)
+                layer.add(_scaleAnimation(fromScale: 1.2, toScale: 0.8, duration: 0.8, repeatCount: Float.greatestFiniteMagnitude), forKey: kAXBadgeViewScaleAnimationKey)
             case .shake:
-                layer.add(_shakeAnimation(repeatCount: FLT_MAX, duration: 0.8, fromLayer: layer), forKey: kAXBadgeViewShakeAnimationKey)
+                layer.add(_shakeAnimation(repeatCount: Float.greatestFiniteMagnitude, duration: 0.8, fromLayer: layer), forKey: kAXBadgeViewShakeAnimationKey)
             default:
                 layer.removeAllAnimations()
             }
@@ -442,7 +442,7 @@ private func _breathingAnimation(duration:TimeInterval) -> CABasicAnimation {
     animation.toValue = 0.1
     animation.autoreverses = true
     animation.duration = duration
-    animation.repeatCount = FLT_MAX
+    animation.repeatCount = Float.greatestFiniteMagnitude
     animation.isRemovedOnCompletion = false
     animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
     animation.fillMode = kCAFillModeForwards
