@@ -1,0 +1,9 @@
+enabled: true
+# types: # defaults using (feat|fix|docs|style|refactor|test|chore) types.
+scope:
+  required: false
+  allows-ascii-punctuation: true
+# ignoring-pattern: # Default is nil.
+# ignores-hash-anchored-lines: true # Default is false.
+# allows-revert: true # Default is true.
+# ignores-trailing-new-lines: true # Default is false.

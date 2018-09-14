@@ -57,6 +57,7 @@ extension AXBadgeView {
   public enum Offset {
     case least
     case exact(CGFloat)
+    case percent(CGFloat)
     case greatest
   }
   
@@ -366,7 +367,7 @@ public class AXBadgeView: UILabel {
         }
         
         switch offsets.x {
-        case .least, .exact(0.0):
+        case .least, .exact(0.0), .percent(0.0):
           _horizontalLayout = NSLayoutConstraint(
             item: self,
             attribute: .centerX,
@@ -376,7 +377,7 @@ public class AXBadgeView: UILabel {
             multiplier: 1.0,
             constant: 0.0
           )
-        case .greatest, .exact(suview.bounds.width):
+        case .greatest, .exact(suview.bounds.width), .percent(1.0):
           _horizontalLayout = NSLayoutConstraint(
             item: self,
             attribute: .centerX,
@@ -396,10 +397,20 @@ public class AXBadgeView: UILabel {
             multiplier: val / suview.bounds.width,
             constant: 0.0
           )
+        case .percent(let val):
+          _horizontalLayout = NSLayoutConstraint(
+            item: self,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: suview,
+            attribute: .right,
+            multiplier: max(0.0, min(1.0, val)),
+            constant: 0.0
+          )
         }
         
         switch offsets.y {
-        case .least, .exact(0.0):
+        case .least, .exact(0.0), .percent(0.0):
           _verticalLayout = NSLayoutConstraint(
             item: self,
             attribute: .centerY,
@@ -409,7 +420,7 @@ public class AXBadgeView: UILabel {
             multiplier: 1.0,
             constant: 0.0
           )
-        case .greatest, .exact(suview.bounds.height):
+        case .greatest, .exact(suview.bounds.height), .percent(1.0):
           _verticalLayout = NSLayoutConstraint(
             item: self,
             attribute: .centerY,
@@ -427,6 +438,16 @@ public class AXBadgeView: UILabel {
             toItem: suview,
             attribute: .bottom,
             multiplier: val / suview.bounds.height,
+            constant: 0.0
+          )
+        case .percent(let val):
+          _verticalLayout = NSLayoutConstraint(
+            item: self,
+            attribute: .centerY,
+            relatedBy: .equal,
+            toItem: suview,
+            attribute: .bottom,
+            multiplier: max(0.0, min(1.0, val)),
             constant: 0.0
           )
         }
