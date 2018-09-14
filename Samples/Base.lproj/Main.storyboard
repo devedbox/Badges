@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AXBadgeView_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Badge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -60,7 +60,7 @@
                                 <segue destination="9jr-bg-X9G" kind="show" id="Mrg-Xn-VYp"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="trash" id="RQC-wd-xjH">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="trash" id="RQC-wd-xjH">
                             <connections>
                                 <segue destination="9jr-bg-X9G" kind="show" id="kHa-3P-vQi"/>
                             </connections>

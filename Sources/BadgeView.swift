@@ -1,34 +1,34 @@
 //
-// AXBadgeView.swift
-// AXBadgeView-Swift
+//  BadgeView.swift
+//  Badge
 //
-// The MIT License (MIT)
+//  The MIT License (MIT)
 //
-// Copyright (c) 2016 devedbox.
+//  Copyright (c) 2016 devedbox.
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
 
 import UIKit
 
 // MARK: - Types.
 
-extension AXBadgeView {
+extension BadgeView {
   
   // MARK: Style.
   
@@ -75,11 +75,11 @@ extension AXBadgeView {
   }
 }
 
-// MARK: - AXBadgeViewDelegate.
+// MARK: - BadgeViewDelegate.
 
-public protocol AXBadgeViewDelegate {
+public protocol BadgeViewDelegate {
   /// Badge view property.
-  var badgeView: AXBadgeView { get set }
+  var badge: BadgeView { get set }
   /// Animated to show the badge view.
   func showBadge(animated: Bool)
   /// Animated to hide the badge view.
@@ -88,23 +88,23 @@ public protocol AXBadgeViewDelegate {
 
 // MARK: - UIView.
 
-extension UIView: AXBadgeViewDelegate {
+extension UIView: BadgeViewDelegate {
   /// The associated keys.
   private struct _AssociatedKeys {
     /// Key for `badgeView`.
-    static var badgeView = "badgeViewKey"
+    static var badge = "badgeKey"
   }
   /// Returns the badge view of the receiver.
-  public var badgeView: AXBadgeView {
+  public var badge: BadgeView {
     get {
-      if let badge = objc_getAssociatedObject(self, &_AssociatedKeys.badgeView) as? AXBadgeView {
+      if let badge = objc_getAssociatedObject(self, &_AssociatedKeys.badge) as? BadgeView {
         return badge
       }
       
-      let badge = AXBadgeView()
+      let badge = BadgeView()
       objc_setAssociatedObject(
         self,
-        &_AssociatedKeys.badgeView,
+        &_AssociatedKeys.badge,
         badge,
         .OBJC_ASSOCIATION_RETAIN_NONATOMIC
       )
@@ -114,7 +114,7 @@ extension UIView: AXBadgeViewDelegate {
     set {
       objc_setAssociatedObject(
         self,
-        &_AssociatedKeys.badgeView,
+        &_AssociatedKeys.badge,
         newValue,
         .OBJC_ASSOCIATION_RETAIN_NONATOMIC
       )
@@ -124,7 +124,7 @@ extension UIView: AXBadgeViewDelegate {
   public func showBadge(
     animated: Bool) -> Void
   {
-    badgeView.show(
+    badge.show(
       animated: animated,
       inView: self
     )
@@ -133,7 +133,7 @@ extension UIView: AXBadgeViewDelegate {
   public func clearBadge(
     animated: Bool) -> Void
   {
-    badgeView.hide(
+    badge.hide(
       animated: animated
     )
   }
@@ -141,19 +141,19 @@ extension UIView: AXBadgeViewDelegate {
 
 // MARK: - UIBarButtonItem.
 
-extension UIBarButtonItem: AXBadgeViewDelegate {
+extension UIBarButtonItem: BadgeViewDelegate {
   private struct _AssociatedKeys {
-    static var badgeView = "badgeViewKey"
+    static var badge = "badgeKey"
   }
   
-  public var badgeView: AXBadgeView {
+  public var badge: BadgeView {
     get {
-      if let badge = objc_getAssociatedObject(self, &_AssociatedKeys.badgeView) as? AXBadgeView {
+      if let badge = objc_getAssociatedObject(self, &_AssociatedKeys.badge) as? BadgeView {
         return badge
       }
-      let badge = AXBadgeView()
+      let badge = BadgeView()
       objc_setAssociatedObject(
-        self, &_AssociatedKeys.badgeView,
+        self, &_AssociatedKeys.badge,
         badge,
         .OBJC_ASSOCIATION_RETAIN_NONATOMIC
       )
@@ -162,7 +162,7 @@ extension UIBarButtonItem: AXBadgeViewDelegate {
     set {
       objc_setAssociatedObject(
         self,
-        &_AssociatedKeys.badgeView,
+        &_AssociatedKeys.badge,
         newValue,
         .OBJC_ASSOCIATION_RETAIN_NONATOMIC
       )
@@ -176,7 +176,7 @@ extension UIBarButtonItem: AXBadgeViewDelegate {
       return
     }
     
-    badgeView.show(
+    badge.show(
       animated: animated,
       inView: try! view.viewInEndpointsOfMinY()
     )
@@ -185,7 +185,7 @@ extension UIBarButtonItem: AXBadgeViewDelegate {
   public func clearBadge(
     animated: Bool) -> Void
   {
-    badgeView.hide(
+    badge.hide(
       animated: animated
     )
   }
@@ -193,20 +193,20 @@ extension UIBarButtonItem: AXBadgeViewDelegate {
 
 // MARK: - UITabBarItem.
 
-extension UITabBarItem: AXBadgeViewDelegate {
+extension UITabBarItem: BadgeViewDelegate {
   private struct _AssociatedKeys {
-    static var badgeView = "badgeViewKey"
+    static var badge = "badgeKey"
   }
   
-  public var badgeView: AXBadgeView {
+  public var badge: BadgeView {
     get {
-      if let badge = objc_getAssociatedObject(self, &_AssociatedKeys.badgeView) as? AXBadgeView {
+      if let badge = objc_getAssociatedObject(self, &_AssociatedKeys.badge) as? BadgeView {
         return badge
       }
-      let badge = AXBadgeView()
+      let badge = BadgeView()
       objc_setAssociatedObject(
         self,
-        &_AssociatedKeys.badgeView,
+        &_AssociatedKeys.badge,
         badge,
         .OBJC_ASSOCIATION_RETAIN_NONATOMIC
       )
@@ -215,7 +215,7 @@ extension UITabBarItem: AXBadgeViewDelegate {
     set {
       objc_setAssociatedObject(
         self,
-        &_AssociatedKeys.badgeView,
+        &_AssociatedKeys.badge,
         newValue,
         .OBJC_ASSOCIATION_RETAIN_NONATOMIC
       )
@@ -229,7 +229,7 @@ extension UITabBarItem: AXBadgeViewDelegate {
       return
     }
     
-    badgeView.show(
+    badge.show(
       animated: animated,
       inView: try! view.viewInEndpointsOfMinY()
     )
@@ -238,7 +238,7 @@ extension UITabBarItem: AXBadgeViewDelegate {
   public func clearBadge(
     animated: Bool) -> Void
   {
-    badgeView.hide(
+    badge.hide(
       animated: animated
     )
   }
@@ -246,7 +246,7 @@ extension UITabBarItem: AXBadgeViewDelegate {
 
 // MARK: - AXBadgeView.
 
-public class AXBadgeView: UILabel {
+public class BadgeView: UILabel {
   /// The attaching view of badge view.
   public final weak var attachingView: UIView!
   /// The alignment view of badge view.

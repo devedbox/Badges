@@ -18,10 +18,10 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     showsView.showBadge(animated: true)
-    showsView.badgeView.animator = .scale
+    showsView.badge.animator = .scale
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
-      self.showsView.badgeView.offsets = .offsets(x: .exact(50.0), y: .exact(0.0))
-      self.showsView.badgeView.style = .new
+      self.showsView.badge.offsets = .offsets(x: .exact(50.0), y: .exact(0.0))
+      self.showsView.badge.style = .new
       DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
         self.heightConstant.constant += 50
         self.widthConstant.constant -= 50
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
               UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIView.AnimationOptions(rawValue: 7), animations: { [unowned self]() -> Void in
                 self.view.layoutSubviews()
                 }, completion:{[unowned self](finished: Bool) -> Void in
-                  self.showsView.badgeView.offsets = .offsets(x: .greatest, y: .least)
+                  self.showsView.badge.offsets = .offsets(x: .greatest, y: .least)
               })
             }
         })
@@ -46,24 +46,24 @@ class ViewController: UIViewController {
     
     // MARK: - Left bar button item.
     navigationItem.leftBarButtonItem?.showBadge(animated: true)
-    navigationItem.leftBarButtonItem?.badgeView.animator = .breathing
-    navigationItem.leftBarButtonItem?.badgeView.style = .number(value: 2)
+    navigationItem.leftBarButtonItem?.badge.animator = .breathing
+    navigationItem.leftBarButtonItem?.badge.style = .number(value: 2)
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
-      self.navigationItem.leftBarButtonItem?.badgeView.style = .number(value: 3)
+      self.navigationItem.leftBarButtonItem?.badge.style = .number(value: 3)
       DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
-        self.navigationItem.leftBarButtonItem?.badgeView.style = .text(value: "1000")
+        self.navigationItem.leftBarButtonItem?.badge.style = .text(value: "1000")
       }
     }
     
     // MARK: - Right bar button item.
     navigationItem.rightBarButtonItem?.showBadge(animated: true)
     // navigationItem.rightBarButtonItem?.badgeView.offsets = .offsets(x: .exact(30.0), y: .least)
-    navigationItem.rightBarButtonItem?.badgeView.animator = .bounce
+    navigationItem.rightBarButtonItem?.badge.animator = .bounce
     
     // MARK: - Tab bar item.
-    navigationController?.tabBarItem?.badgeView.style = .new
+    navigationController?.tabBarItem?.badge.style = .new
     // navigationController?.tabBarItem?.badgeView.offsets = .offsets(x: .exact(view.bounds.width/4+10), y: .exact(0.0))
-    navigationController?.tabBarItem?.badgeView.animator = .breathing
+    navigationController?.tabBarItem?.badge.animator = .breathing
     navigationController?.tabBarItem?.showBadge(animated: true)
   }
   
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
   }
   
   @IBAction func badgeViewAction(_ sender: UIButton) {
-    if showsView.badgeView.visible {
+    if showsView.badge.visible {
       showsView.clearBadge(animated: true)
       self.heightConstant.constant = 100
       self.widthConstant.constant = 100

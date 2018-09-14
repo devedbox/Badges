@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		011308F31C7D9D7600C02261 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011308F21C7D9D7600C02261 /* AppDelegate.swift */; };
-		011308F51C7D9D7600C02261 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011308F41C7D9D7600C02261 /* ViewController.swift */; };
-		011308F81C7D9D7600C02261 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011308F61C7D9D7600C02261 /* Main.storyboard */; };
-		011308FA1C7D9D7600C02261 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011308F91C7D9D7600C02261 /* Assets.xcassets */; };
-		011308FD1C7D9D7600C02261 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011308FB1C7D9D7600C02261 /* LaunchScreen.storyboard */; };
-		011309051C7D9DBD00C02261 /* AXBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011309041C7D9DBD00C02261 /* AXBadgeView.swift */; };
-		DC45AA93214BE13000426272 /* misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AA92214BE13000426272 /* misc.swift */; };
-		DC45AA97214BEF0300426272 /* UIView.Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AA96214BEF0300426272 /* UIView.Filters.swift */; };
+		DC45AAAB214C16EC00426272 /* UIView.Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AAA8214C16EC00426272 /* UIView.Filters.swift */; };
+		DC45AAAC214C16EC00426272 /* misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AAA9214C16EC00426272 /* misc.swift */; };
+		DC45AAAD214C16EC00426272 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AAAA214C16EC00426272 /* BadgeView.swift */; };
+		DCE7406A214C19F000B91746 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE74062214C19F000B91746 /* ViewController.swift */; };
+		DCE7406B214C19F000B91746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE74063214C19F000B91746 /* Assets.xcassets */; };
+		DCE7406C214C19F000B91746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE74064214C19F000B91746 /* LaunchScreen.storyboard */; };
+		DCE7406D214C19F000B91746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE74066214C19F000B91746 /* Main.storyboard */; };
+		DCE7406E214C19F000B91746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE74068214C19F000B91746 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		011308EF1C7D9D7600C02261 /* AXBadgeView-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AXBadgeView-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		011308F21C7D9D7600C02261 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		011308F41C7D9D7600C02261 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		011308F71C7D9D7600C02261 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		011308F91C7D9D7600C02261 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		011308FC1C7D9D7600C02261 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		011308FE1C7D9D7600C02261 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		011309041C7D9DBD00C02261 /* AXBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AXBadgeView.swift; path = AXBadgeView/AXBadgeView.swift; sourceTree = "<group>"; };
-		DC45AA92214BE13000426272 /* misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = misc.swift; path = AXBadgeView/misc.swift; sourceTree = "<group>"; };
-		DC45AA96214BEF0300426272 /* UIView.Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIView.Filters.swift; path = AXBadgeView/UIView.Filters.swift; sourceTree = "<group>"; };
+		011308EF1C7D9D7600C02261 /* Badges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badges.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC45AAA8214C16EC00426272 /* UIView.Filters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.Filters.swift; sourceTree = "<group>"; };
+		DC45AAA9214C16EC00426272 /* misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = misc.swift; sourceTree = "<group>"; };
+		DC45AAAA214C16EC00426272 /* BadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		DCE74062214C19F000B91746 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DCE74063214C19F000B91746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DCE74065214C19F000B91746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DCE74067214C19F000B91746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DCE74068214C19F000B91746 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DCE74069214C19F000B91746 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,8 @@
 		011308E61C7D9D7600C02261 = {
 			isa = PBXGroup;
 			children = (
-				011308F11C7D9D7600C02261 /* AXBadgeView-Swift */,
+				DC45AAA7214C16EC00426272 /* Sources */,
+				DCE74061214C19F000B91746 /* Samples */,
 				011308F01C7D9D7600C02261 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,41 +53,40 @@
 		011308F01C7D9D7600C02261 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				011308EF1C7D9D7600C02261 /* AXBadgeView-Swift.app */,
+				011308EF1C7D9D7600C02261 /* Badges.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		011308F11C7D9D7600C02261 /* AXBadgeView-Swift */ = {
+		DC45AAA7214C16EC00426272 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				011308F21C7D9D7600C02261 /* AppDelegate.swift */,
-				011308F41C7D9D7600C02261 /* ViewController.swift */,
-				011309061C7D9DC000C02261 /* AXBadgeView */,
-				011308F61C7D9D7600C02261 /* Main.storyboard */,
-				011308F91C7D9D7600C02261 /* Assets.xcassets */,
-				011308FB1C7D9D7600C02261 /* LaunchScreen.storyboard */,
-				011308FE1C7D9D7600C02261 /* Info.plist */,
+				DC45AAA9214C16EC00426272 /* misc.swift */,
+				DC45AAA8214C16EC00426272 /* UIView.Filters.swift */,
+				DC45AAAA214C16EC00426272 /* BadgeView.swift */,
 			);
-			path = "AXBadgeView-Swift";
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		011309061C7D9DC000C02261 /* AXBadgeView */ = {
+		DCE74061214C19F000B91746 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				011309041C7D9DBD00C02261 /* AXBadgeView.swift */,
-				DC45AA96214BEF0300426272 /* UIView.Filters.swift */,
-				DC45AA92214BE13000426272 /* misc.swift */,
+				DCE74062214C19F000B91746 /* ViewController.swift */,
+				DCE74063214C19F000B91746 /* Assets.xcassets */,
+				DCE74064214C19F000B91746 /* LaunchScreen.storyboard */,
+				DCE74066214C19F000B91746 /* Main.storyboard */,
+				DCE74068214C19F000B91746 /* AppDelegate.swift */,
+				DCE74069214C19F000B91746 /* Info.plist */,
 			);
-			name = AXBadgeView;
+			path = Samples;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		011308EE1C7D9D7600C02261 /* AXBadgeView-Swift */ = {
+		011308EE1C7D9D7600C02261 /* Badges */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 011309011C7D9D7600C02261 /* Build configuration list for PBXNativeTarget "AXBadgeView-Swift" */;
+			buildConfigurationList = 011309011C7D9D7600C02261 /* Build configuration list for PBXNativeTarget "Badges" */;
 			buildPhases = (
 				011308EB1C7D9D7600C02261 /* Sources */,
 				011308EC1C7D9D7600C02261 /* Frameworks */,
@@ -96,9 +96,9 @@
 			);
 			dependencies = (
 			);
-			name = "AXBadgeView-Swift";
+			name = Badges;
 			productName = "AXBadgeView-Swift";
-			productReference = 011308EF1C7D9D7600C02261 /* AXBadgeView-Swift.app */;
+			productReference = 011308EF1C7D9D7600C02261 /* Badges.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -114,10 +114,11 @@
 					011308EE1C7D9D7600C02261 = {
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
-			buildConfigurationList = 011308EA1C7D9D7600C02261 /* Build configuration list for PBXProject "AXBadgeView-Swift" */;
+			buildConfigurationList = 011308EA1C7D9D7600C02261 /* Build configuration list for PBXProject "Badges" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -130,7 +131,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				011308EE1C7D9D7600C02261 /* AXBadgeView-Swift */,
+				011308EE1C7D9D7600C02261 /* Badges */,
 			);
 		};
 /* End PBXProject section */
@@ -140,9 +141,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				011308FD1C7D9D7600C02261 /* LaunchScreen.storyboard in Resources */,
-				011308FA1C7D9D7600C02261 /* Assets.xcassets in Resources */,
-				011308F81C7D9D7600C02261 /* Main.storyboard in Resources */,
+				DCE7406D214C19F000B91746 /* Main.storyboard in Resources */,
+				DCE7406B214C19F000B91746 /* Assets.xcassets in Resources */,
+				DCE7406C214C19F000B91746 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,31 +154,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC45AA93214BE13000426272 /* misc.swift in Sources */,
-				011308F51C7D9D7600C02261 /* ViewController.swift in Sources */,
-				DC45AA97214BEF0300426272 /* UIView.Filters.swift in Sources */,
-				011308F31C7D9D7600C02261 /* AppDelegate.swift in Sources */,
-				011309051C7D9DBD00C02261 /* AXBadgeView.swift in Sources */,
+				DC45AAAB214C16EC00426272 /* UIView.Filters.swift in Sources */,
+				DC45AAAD214C16EC00426272 /* BadgeView.swift in Sources */,
+				DCE7406A214C19F000B91746 /* ViewController.swift in Sources */,
+				DCE7406E214C19F000B91746 /* AppDelegate.swift in Sources */,
+				DC45AAAC214C16EC00426272 /* misc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		011308F61C7D9D7600C02261 /* Main.storyboard */ = {
+		DCE74064214C19F000B91746 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				011308F71C7D9D7600C02261 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		011308FB1C7D9D7600C02261 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				011308FC1C7D9D7600C02261 /* Base */,
+				DCE74065214C19F000B91746 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DCE74066214C19F000B91746 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCE74067214C19F000B91746 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -289,10 +290,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "AXBadgeView-Swift/Info.plist";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/Samples/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "devedbox.AXBadgeView-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = devedbox.badge.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -301,10 +305,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "AXBadgeView-Swift/Info.plist";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/Samples/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "devedbox.AXBadgeView-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = devedbox.badge.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
@@ -312,7 +319,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		011308EA1C7D9D7600C02261 /* Build configuration list for PBXProject "AXBadgeView-Swift" */ = {
+		011308EA1C7D9D7600C02261 /* Build configuration list for PBXProject "Badges" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				011308FF1C7D9D7600C02261 /* Debug */,
@@ -321,7 +328,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		011309011C7D9D7600C02261 /* Build configuration list for PBXNativeTarget "AXBadgeView-Swift" */ = {
+		011309011C7D9D7600C02261 /* Build configuration list for PBXNativeTarget "Badges" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				011309021C7D9D7600C02261 /* Debug */,
