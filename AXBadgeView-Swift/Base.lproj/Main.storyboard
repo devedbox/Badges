@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z1Q-c0-vzv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z1Q-c0-vzv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14278.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -55,8 +55,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XN7-GQ-nrf">
-                        <barButtonItem key="leftBarButtonItem" title="Test" id="oOx-y5-p3G"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="trash" id="RQC-wd-xjH"/>
+                        <barButtonItem key="leftBarButtonItem" title="Test" id="oOx-y5-p3G">
+                            <connections>
+                                <segue destination="9jr-bg-X9G" kind="show" id="Mrg-Xn-VYp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="trash" id="RQC-wd-xjH">
+                            <connections>
+                                <segue destination="9jr-bg-X9G" kind="show" id="kHa-3P-vQi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="heightConstant" destination="214-Rf-To5" id="2Y1-4i-Wo9"/>
@@ -68,10 +76,28 @@
             </objects>
             <point key="canvasLocation" x="1576" y="-210"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="poC-lu-Qse">
+            <objects>
+                <viewController id="9jr-bg-X9G" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mnw-PU-KUg"/>
+                        <viewControllerLayoutGuide type="bottom" id="MAl-M4-aBX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eqH-M1-7Ns">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8x3-TV-Fzj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2218" y="-210"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="EJd-mg-Hyr">
             <objects>
-                <tabBarController id="Z1Q-c0-vzv" sceneMemberID="viewController">
+                <tabBarController hidesBottomBarWhenPushed="YES" id="Z1Q-c0-vzv" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="PLz-py-zIl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -89,7 +115,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Fzd-U7-kHQ">
             <objects>
-                <navigationController id="iRx-7D-Oif" sceneMemberID="viewController">
+                <navigationController hidesBottomBarWhenPushed="YES" id="iRx-7D-Oif" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="Mr3-S6-qv2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="exU-6x-aMK">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -123,4 +149,7 @@
             <point key="canvasLocation" x="1080" y="459"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="kHa-3P-vQi"/>
+    </inferredMetricsTieBreakers>
 </document>

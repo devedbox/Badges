@@ -14,6 +14,7 @@
 		011308FD1C7D9D7600C02261 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 011308FB1C7D9D7600C02261 /* LaunchScreen.storyboard */; };
 		011309051C7D9DBD00C02261 /* AXBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011309041C7D9DBD00C02261 /* AXBadgeView.swift */; };
 		DC45AA93214BE13000426272 /* misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AA92214BE13000426272 /* misc.swift */; };
+		DC45AA97214BEF0300426272 /* UIView.Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AA96214BEF0300426272 /* UIView.Filters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		011308FE1C7D9D7600C02261 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		011309041C7D9DBD00C02261 /* AXBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AXBadgeView.swift; path = AXBadgeView/AXBadgeView.swift; sourceTree = "<group>"; };
 		DC45AA92214BE13000426272 /* misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = misc.swift; path = AXBadgeView/misc.swift; sourceTree = "<group>"; };
+		DC45AA96214BEF0300426272 /* UIView.Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIView.Filters.swift; path = AXBadgeView/UIView.Filters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				011309041C7D9DBD00C02261 /* AXBadgeView.swift */,
+				DC45AA96214BEF0300426272 /* UIView.Filters.swift */,
 				DC45AA92214BE13000426272 /* misc.swift */,
 			);
 			name = AXBadgeView;
@@ -152,6 +155,7 @@
 			files = (
 				DC45AA93214BE13000426272 /* misc.swift in Sources */,
 				011308F51C7D9D7600C02261 /* ViewController.swift in Sources */,
+				DC45AA97214BEF0300426272 /* UIView.Filters.swift in Sources */,
 				011308F31C7D9D7600C02261 /* AppDelegate.swift in Sources */,
 				011309051C7D9DBD00C02261 /* AXBadgeView.swift in Sources */,
 			);

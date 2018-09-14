@@ -57,12 +57,12 @@ class ViewController: UIViewController {
     
     // MARK: - Right bar button item.
     navigationItem.rightBarButtonItem?.showBadge(animated: true)
-    navigationItem.rightBarButtonItem?.badgeView.offsets = .offsets(x: .exact(30.0), y: .least)
+    // navigationItem.rightBarButtonItem?.badgeView.offsets = .offsets(x: .exact(30.0), y: .least)
     navigationItem.rightBarButtonItem?.badgeView.animator = .bounce
     
     // MARK: - Tab bar item.
     navigationController?.tabBarItem?.badgeView.style = .new
-    navigationController?.tabBarItem?.badgeView.offsets = .offsets(x: .exact(view.bounds.width/4+10), y: .exact(0.0))
+    // navigationController?.tabBarItem?.badgeView.offsets = .offsets(x: .exact(view.bounds.width/4+10), y: .exact(0.0))
     navigationController?.tabBarItem?.badgeView.animator = .breathing
     navigationController?.tabBarItem?.showBadge(animated: true)
   }

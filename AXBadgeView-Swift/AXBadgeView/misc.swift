@@ -6,6 +6,7 @@
 //  Copyright © 2018 devedbox. All rights reserved.
 //
 
+import UIKit
 import QuartzCore
 
 // MARK: - Animations.

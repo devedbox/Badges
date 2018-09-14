@@ -81,9 +81,9 @@ public protocol AXBadgeViewDelegate {
   /// Badge view property.
   var badgeView: AXBadgeView { get set }
   /// Animated to show the badge view.
-  func showBadge(animated: Bool) -> Void
+  func showBadge(animated: Bool)
   /// Animated to hide the badge view.
-  func clearBadge(animated: Bool) -> Void
+  func clearBadge(animated: Bool)
 }
 
 // MARK: - UIView.
@@ -172,9 +172,13 @@ extension UIBarButtonItem: AXBadgeViewDelegate {
   public func showBadge(
     animated: Bool) -> Void
   {
+    guard let view = value(forKey: "view") as? UIView else {
+      return
+    }
+    
     badgeView.show(
       animated: animated,
-      inView: self.value(forKey: "view") as? UIView
+      inView: try! view.viewInEndpointsOfMinY()
     )
   }
   
@@ -221,9 +225,13 @@ extension UITabBarItem: AXBadgeViewDelegate {
   public func showBadge(
     animated: Bool) -> Void
   {
+    guard let view = value(forKey: "view") as? UIView else {
+      return
+    }
+    
     badgeView.show(
       animated: animated,
-      inView: value(forKey: "view") as? UIView
+      inView: try! view.viewInEndpointsOfMinY()
     )
   }
   
@@ -241,6 +249,8 @@ extension UITabBarItem: AXBadgeViewDelegate {
 public class AXBadgeView: UILabel {
   /// The attaching view of badge view.
   public final weak var attachingView: UIView!
+  /// The alignment view of badge view.
+  public final weak var alignmentView: UIView!
   /// Limited number to show text on .number style. Default is 99.
   open var limitedNumber: Int = 99
   /// Override text as unavailable, using style instead.
@@ -256,7 +266,7 @@ public class AXBadgeView: UILabel {
     didSet {
       switch style {
       case .normal:
-        super.text = nil
+        super.text = ""
       case .new:
         super.text = "new"
       case .number(value: let val):
@@ -350,20 +360,21 @@ public class AXBadgeView: UILabel {
   open var offsets = Offsets(x: .greatest, y: .least) {
     didSet {
       if
-        let suview = superview
+        let suview = superview,
+        let align = alignmentView ?? superview
       {
         if
           let _ = _horizontalLayout,
           suview.constraints.contains(_horizontalLayout)
         {
-          superview?.removeConstraint(_horizontalLayout)
+          suview.removeConstraint(_horizontalLayout)
         }
         
         if
           let _ = _verticalLayout,
           suview.constraints.contains(_verticalLayout)
         {
-          superview?.removeConstraint(_verticalLayout)
+          suview.removeConstraint(_verticalLayout)
         }
         
         switch offsets.x {
@@ -372,7 +383,7 @@ public class AXBadgeView: UILabel {
             item: self,
             attribute: .centerX,
             relatedBy: .equal,
-            toItem: suview,
+            toItem: align,
             attribute: .left,
             multiplier: 1.0,
             constant: 0.0
@@ -382,7 +393,7 @@ public class AXBadgeView: UILabel {
             item: self,
             attribute: .centerX,
             relatedBy: .equal,
-            toItem: suview,
+            toItem: align,
             attribute: .right,
             multiplier: 1.0,
             constant: 0.0
@@ -392,7 +403,7 @@ public class AXBadgeView: UILabel {
             item: self,
             attribute: .centerX,
             relatedBy: .equal,
-            toItem: suview,
+            toItem: align,
             attribute: .right,
             multiplier: val / suview.bounds.width,
             constant: 0.0
@@ -402,7 +413,7 @@ public class AXBadgeView: UILabel {
             item: self,
             attribute: .centerX,
             relatedBy: .equal,
-            toItem: suview,
+            toItem: align,
             attribute: .right,
             multiplier: max(0.0, min(1.0, val)),
             constant: 0.0
@@ -415,7 +426,7 @@ public class AXBadgeView: UILabel {
             item: self,
             attribute: .centerY,
             relatedBy: .equal,
-            toItem: suview,
+            toItem: align,
             attribute: .top,
             multiplier: 1.0,
             constant: 0.0
@@ -425,7 +436,7 @@ public class AXBadgeView: UILabel {
             item: self,
             attribute: .centerY,
             relatedBy: .equal,
-            toItem: suview,
+            toItem: align,
             attribute: .bottom,
             multiplier: 1.0,
             constant: 0.0
@@ -435,7 +446,7 @@ public class AXBadgeView: UILabel {
             item: self,
             attribute: .centerY,
             relatedBy: .equal,
-            toItem: suview,
+            toItem: align,
             attribute: .bottom,
             multiplier: val / suview.bounds.height,
             constant: 0.0
@@ -445,16 +456,16 @@ public class AXBadgeView: UILabel {
             item: self,
             attribute: .centerY,
             relatedBy: .equal,
-            toItem: suview,
+            toItem: align,
             attribute: .bottom,
             multiplier: max(0.0, min(1.0, val)),
             constant: 0.0
           )
         }
         
-        superview?.addConstraint(_horizontalLayout)
-        superview?.addConstraint(_verticalLayout)
-        superview?.setNeedsDisplay()
+        suview.addConstraint(_horizontalLayout)
+        suview.addConstraint(_verticalLayout)
+        suview.setNeedsDisplay()
       }
     }
   }
@@ -533,8 +544,9 @@ public class AXBadgeView: UILabel {
   {
     var susize = super.sizeThatFits(size)
     
-    susize.width = max(susize.width + susize.height/2, minSize.width)
+    susize.width = max(susize.width + susize.height / 2, minSize.width)
     susize.height = max(susize.height, minSize.height)
+    
     return susize
   }
   /// - override: willMoveToSuperview
@@ -564,7 +576,6 @@ public class AXBadgeView: UILabel {
         suview.addConstraint(_horizontalLayout)
       }
       
-      suview.setNeedsDisplay()
       suview.bringSubviewToFront(self)
     }
   }
@@ -576,10 +587,14 @@ public class AXBadgeView: UILabel {
   /// - returns: Void.
   open func show(
     animated:Bool,
-    inView view: UIView? = nil) -> Void
+    inView attachingView: UIView? = nil,
+    alignTo alignmentView: UIView? = nil) -> Void
   {
-    attachingView = view
-    attachingView?.addSubview(self)
+    self.attachingView = attachingView
+    self.alignmentView = alignmentView ?? attachingView
+    self.attachingView?.addSubview(self)
+    
+    self.attachingView?.clipsToBounds = false
     
     isHidden    ? isHidden = false : ()
     alpha < 1.0 ? alpha = 1.0      : ()
