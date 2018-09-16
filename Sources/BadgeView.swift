@@ -86,6 +86,16 @@ public protocol BadgeViewDelegate {
   func clearBadge(animated: Bool)
 }
 
+extension BadgeViewDelegate {
+  public func showBadge(
+    animated: Bool,
+    configuration: (BadgeView) -> Void = { _ in })
+  {
+    configuration(badge)
+    showBadge(animated: animated)
+  }
+}
+
 // MARK: - UIView.
 
 extension UIView: BadgeViewDelegate {
@@ -633,7 +643,7 @@ public class BadgeView: UILabel {
   /// - returns: Void.
   open func hide(
     animated: Bool,
-    completion: @escaping () -> Void = { }) -> Void
+    completion: @escaping (() -> Void) = { }) -> Void
   {
     if animated {
       UIView.animate(

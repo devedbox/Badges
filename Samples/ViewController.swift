@@ -46,9 +46,10 @@ class ViewController: UIViewController {
     navigationController?.navigationBar.layoutIfNeeded()
     
     // MARK: - Left bar button item.
-    navigationItem.leftBarButtonItem?.showBadge(animated: true)
-    navigationItem.leftBarButtonItem?.badge.animator = .breathing
-    navigationItem.leftBarButtonItem?.badge.style = .number(value: 2)
+    navigationItem.leftBarButtonItem?.showBadge(animated: true) {
+      $0.animator = .breathing
+      $0.style = .number(value: 2)
+    }
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
       self.navigationItem.leftBarButtonItem?.badge.style = .number(value: 3)
       DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
