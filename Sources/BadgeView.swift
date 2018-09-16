@@ -294,7 +294,10 @@ public class BadgeView: UILabel {
       _heightLayout.constant = bounds.height
       setNeedsLayout()
       
-      if visible, scaleContent {
+      if
+        visible,
+        scaleContent
+      {
         show(animated: true)
       }
       
@@ -475,7 +478,9 @@ public class BadgeView: UILabel {
   open var minSize = CGSize(width: 12.0, height: 12.0) {
     didSet {
       sizeToFit()
-      self.style = { style }()
+      style = {
+        style
+      }()
     }
   }
   /// Scale content when set new content to badge label. Defaults to false.
@@ -555,9 +560,12 @@ public class BadgeView: UILabel {
   {
     super.willMove(toSuperview: newSuperview)
     
-    if let _ = newSuperview {
-      self.offsets = { offsets }()
+    newSuperview.map { _ in
+      offsets = {
+        offsets
+      }()
     }
+    
     alpha = 1.0
   }
   /// - override: didMoveToSuperview
@@ -625,7 +633,7 @@ public class BadgeView: UILabel {
   /// - returns: Void.
   open func hide(
     animated: Bool,
-    completion:(()->())? = nil) -> Void
+    completion: @escaping () -> Void = { }) -> Void
   {
     if animated {
       UIView.animate(
@@ -637,13 +645,13 @@ public class BadgeView: UILabel {
           if finished {
             self.removeFromSuperview()
             self.alpha = 1.0
-            completion?()
+            completion()
           }
         }
       )
     } else {
       self.removeFromSuperview()
-      completion?()
+      completion()
     }
   }
 }

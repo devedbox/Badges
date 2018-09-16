@@ -16,6 +16,7 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    tabBarController?.tabBar.isHidden = false
     // Do any additional setup after loading the view, typically from a nib.
     showsView.showBadge(animated: true)
     showsView.badge.animator = .scale
@@ -58,7 +59,7 @@ class ViewController: UIViewController {
     // MARK: - Right bar button item.
     navigationItem.rightBarButtonItem?.showBadge(animated: true)
     // navigationItem.rightBarButtonItem?.badgeView.offsets = .offsets(x: .exact(30.0), y: .least)
-    navigationItem.rightBarButtonItem?.badge.animator = .bounce
+    navigationItem.rightBarButtonItem?.badge.animator = .shaking
     
     // MARK: - Tab bar item.
     navigationController?.tabBarItem?.badge.style = .new

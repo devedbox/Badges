@@ -15,7 +15,23 @@
 		DCE7406C214C19F000B91746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE74064214C19F000B91746 /* LaunchScreen.storyboard */; };
 		DCE7406D214C19F000B91746 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE74066214C19F000B91746 /* Main.storyboard */; };
 		DCE7406E214C19F000B91746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE74068214C19F000B91746 /* AppDelegate.swift */; };
+		DCE74071214C9F2100B91746 /* BadgePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE74070214C9F2100B91746 /* BadgePaths.swift */; };
+		DCE7407D214E2D7400B91746 /* misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AAA9214C16EC00426272 /* misc.swift */; };
+		DCE7407E214E2D7400B91746 /* UIView.Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AAA8214C16EC00426272 /* UIView.Filters.swift */; };
+		DCE7407F214E2D7400B91746 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45AAAA214C16EC00426272 /* BadgeView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DCE74074214E2D6300B91746 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		011308EF1C7D9D7600C02261 /* Badges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badges.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,10 +44,19 @@
 		DCE74067214C19F000B91746 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DCE74068214C19F000B91746 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE74069214C19F000B91746 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCE74070214C9F2100B91746 /* BadgePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgePaths.swift; sourceTree = "<group>"; };
+		DCE74076214E2D6300B91746 /* liblibBadges.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibBadges.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		011308EC1C7D9D7600C02261 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCE74073214E2D6300B91746 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +71,7 @@
 			children = (
 				DC45AAA7214C16EC00426272 /* Sources */,
 				DCE74061214C19F000B91746 /* Samples */,
+				DCE74077214E2D6400B91746 /* libBadges */,
 				011308F01C7D9D7600C02261 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				011308EF1C7D9D7600C02261 /* Badges.app */,
+				DCE74076214E2D6300B91746 /* liblibBadges.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +91,7 @@
 				DC45AAA9214C16EC00426272 /* misc.swift */,
 				DC45AAA8214C16EC00426272 /* UIView.Filters.swift */,
 				DC45AAAA214C16EC00426272 /* BadgeView.swift */,
+				DCE74070214C9F2100B91746 /* BadgePaths.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -79,6 +107,13 @@
 				DCE74069214C19F000B91746 /* Info.plist */,
 			);
 			path = Samples;
+			sourceTree = "<group>";
+		};
+		DCE74077214E2D6400B91746 /* libBadges */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = libBadges;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,13 +136,30 @@
 			productReference = 011308EF1C7D9D7600C02261 /* Badges.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DCE74075214E2D6300B91746 /* libBadges */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCE7407A214E2D6400B91746 /* Build configuration list for PBXNativeTarget "libBadges" */;
+			buildPhases = (
+				DCE74072214E2D6300B91746 /* Sources */,
+				DCE74073214E2D6300B91746 /* Frameworks */,
+				DCE74074214E2D6300B91746 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libBadges;
+			productName = libBadges;
+			productReference = DCE74076214E2D6300B91746 /* liblibBadges.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		011308E71C7D9D7600C02261 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = devedbox;
 				TargetAttributes = {
@@ -115,6 +167,11 @@
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Manual;
+					};
+					DCE74075214E2D6300B91746 = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = TKA48YVS5T;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -132,6 +189,7 @@
 			projectRoot = "";
 			targets = (
 				011308EE1C7D9D7600C02261 /* Badges */,
+				DCE74075214E2D6300B91746 /* libBadges */,
 			);
 		};
 /* End PBXProject section */
@@ -154,11 +212,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCE74071214C9F2100B91746 /* BadgePaths.swift in Sources */,
 				DC45AAAB214C16EC00426272 /* UIView.Filters.swift in Sources */,
 				DC45AAAD214C16EC00426272 /* BadgeView.swift in Sources */,
 				DCE7406A214C19F000B91746 /* ViewController.swift in Sources */,
 				DCE7406E214C19F000B91746 /* AppDelegate.swift in Sources */,
 				DC45AAAC214C16EC00426272 /* misc.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCE74072214E2D6300B91746 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCE7407D214E2D7400B91746 /* misc.swift in Sources */,
+				DCE7407E214E2D7400B91746 /* UIView.Filters.swift in Sources */,
+				DCE7407F214E2D7400B91746 /* BadgeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +385,54 @@
 			};
 			name = Release;
 		};
+		DCE7407B214E2D6400B91746 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TKA48YVS5T;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DCE7407C214E2D6400B91746 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TKA48YVS5T;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -333,6 +450,15 @@
 			buildConfigurations = (
 				011309021C7D9D7600C02261 /* Debug */,
 				011309031C7D9D7600C02261 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCE7407A214E2D6400B91746 /* Build configuration list for PBXNativeTarget "libBadges" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCE7407B214E2D6400B91746 /* Debug */,
+				DCE7407C214E2D6400B91746 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
