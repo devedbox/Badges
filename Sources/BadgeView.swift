@@ -257,6 +257,50 @@ extension UITabBarItem: BadgeViewDelegate {
 // MARK: - AXBadgeView.
 
 public class BadgeView: UILabel {
+  /// The mask of the badge view using shape layer.
+  public struct Mask {
+    /// The path content of the badge view's layer.
+    public private(set) var path: (CGRect) -> CGPath
+
+    public init(
+      path: @escaping (CGRect) -> CGPath)
+    {
+      self.path = path
+    }
+    
+    fileprivate func _layer(
+      for frame: CGRect) -> CAShapeLayer
+    {
+      let layer = CAShapeLayer()
+      layer.fillColor = UIColor.black.cgColor
+      layer.path = path(frame)
+      return layer
+    }
+    
+    // MARK: Presets.
+    
+    public static let cornerRadius: Mask = Mask {
+      return UIBezierPath(
+        roundedRect: $0,
+        cornerRadius: $0.height * 0.5
+      ).cgPath
+    }
+    
+    public static func roundingCorner(
+      _ corner: UIRectCorner) -> Mask
+    {
+      return Mask {
+        return UIBezierPath(
+          roundedRect: $0,
+          byRoundingCorners: corner,
+          cornerRadii: CGSize(
+            width: $0.height * 0.5,
+            height: $0.height * 0.5
+          )
+        ).cgPath
+      }
+    }
+  }
   /// The attaching view of badge view.
   public final weak var attachingView: UIView!
   /// The alignment view of badge view.
@@ -270,6 +314,12 @@ public class BadgeView: UILabel {
       return super.text
     }
     set { }
+  }
+  /// The mask of the badge view.
+  public final var masking: Mask = .cornerRadius {
+    didSet {
+      setNeedsLayout()
+    }
   }
   /// Style of badge view. Defaults to AXBadgeViewNormal.
   open var style = Style.normal {
@@ -290,8 +340,6 @@ public class BadgeView: UILabel {
       }
       
       sizeToFit()
-      layer.cornerRadius = bounds.height/2
-      layer.masksToBounds = true
       
       if !constraints.contains(_widthLayout) {
         addConstraint(_widthLayout)
@@ -563,6 +611,12 @@ public class BadgeView: UILabel {
     susize.height = max(susize.height, minSize.height)
     
     return susize
+  }
+  /// - override: layoutSubviews
+  public override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    layer.mask = masking._layer(for: bounds)
   }
   /// - override: willMoveToSuperview
   override open func willMove(
