@@ -25,6 +25,8 @@ class ViewController: UIViewController {
       .topRight
       ]
     )
+    showsView.badge.strokeColor = .white
+    
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
       self.showsView.badge.offsets = .offsets(x: .exact(50.0), y: .exact(0.0))
       self.showsView.badge.style = .new
@@ -61,6 +63,7 @@ class ViewController: UIViewController {
         ]
       )
     }
+    navigationItem.leftBarButtonItem?.badge.strokeColor = .white
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
       self.navigationItem.leftBarButtonItem?.badge.style = .number(value: 3)
       DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
