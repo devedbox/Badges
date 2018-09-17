@@ -107,6 +107,10 @@ extension UIView: BadgeViewDelegate {
   /// Returns the badge view of the receiver.
   public var badge: BadgeView {
     get {
+      if self is BadgeView {
+        fatalError("The badge view of 'BadgeView' itself is not accessible.")
+      }
+      
       if let badge = objc_getAssociatedObject(self, &_AssociatedKeys.badge) as? BadgeView {
         return badge
       }
@@ -122,6 +126,10 @@ extension UIView: BadgeViewDelegate {
     }
     
     set {
+      if self is BadgeView {
+        fatalError("The badge view of 'BadgeView' itself is not accessible.")
+      }
+      
       objc_setAssociatedObject(
         self,
         &_AssociatedKeys.badge,
@@ -321,6 +329,14 @@ public class BadgeView: UILabel {
       setNeedsLayout()
     }
   }
+  /// The stroke color of the badge view.
+  open var strokeColor: UIColor? {
+    didSet {
+      setNeedsLayout()
+    }
+  }
+  /// The stroke appearance layer.
+  private lazy var _strokeLayer = CAShapeLayer()
   /// Style of badge view. Defaults to AXBadgeViewNormal.
   open var style = Style.normal {
     didSet {
@@ -616,7 +632,8 @@ public class BadgeView: UILabel {
   public override func layoutSubviews() {
     super.layoutSubviews()
     
-    layer.mask = masking._layer(for: bounds)
+    _maskBadgeViewIfNeeded(with: masking)
+    _strokeEdgesOfBadgeViewIfNeeded(with: strokeColor?.cgColor)
   }
   /// - override: willMoveToSuperview
   override open func willMove(
@@ -716,6 +733,33 @@ public class BadgeView: UILabel {
     } else {
       self.removeFromSuperview()
       completion()
+    }
+  }
+  /// Mask the bdage view if needed.
+  private func _maskBadgeViewIfNeeded(
+    with masking: Mask)
+  {
+    layer.mask = masking._layer(for: bounds)
+  }
+  /// Stroke the badge view's edges if needed.
+  ///
+  /// - Parameter strokeColor: The color of the strokes. Nil to ignore stroke.
+  private func _strokeEdgesOfBadgeViewIfNeeded(
+    with strokeColor: CGColor?)
+  {
+    if
+      let strokeColor = strokeColor
+    {
+      _strokeLayer.frame = bounds
+      _strokeLayer.path = masking.path(bounds.insetBy(dx: 0.5, dy: 0.5))
+      _strokeLayer.strokeColor = strokeColor
+      _strokeLayer.fillColor = nil
+      _strokeLayer.strokeStart = 0.0
+      _strokeLayer.strokeEnd = 1.0
+      _strokeLayer.lineWidth = 1.0
+      layer.addSublayer(_strokeLayer)
+    } else {
+      _strokeLayer.removeFromSuperlayer()
     }
   }
 }
