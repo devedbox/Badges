@@ -16,10 +16,15 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tabBarController?.tabBar.isHidden = false
     // Do any additional setup after loading the view, typically from a nib.
     showsView.showBadge(animated: true)
     showsView.badge.animator = .scale
+    showsView.badge.masking = .roundingCorner([
+      .topLeft,
+      .bottomRight,
+      .topRight
+      ]
+    )
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
       self.showsView.badge.offsets = .offsets(x: .exact(50.0), y: .exact(0.0))
       self.showsView.badge.style = .new
@@ -47,8 +52,14 @@ class ViewController: UIViewController {
     
     // MARK: - Left bar button item.
     navigationItem.leftBarButtonItem?.showBadge(animated: true) {
-      $0.animator = .breathing
+      // $0.animator = .breathing
       $0.style = .number(value: 2)
+      $0.masking = .roundingCorner([
+        .topLeft,
+        .bottomRight,
+        .topRight
+        ]
+      )
     }
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [unowned self]() -> Void in
       self.navigationItem.leftBarButtonItem?.badge.style = .number(value: 3)
